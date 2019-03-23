@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .apiviews import PollList, PollDetail
+from .apiviews import PollList, PollDetail, LoginView
 from .class_views import PollListGeneric, PollDetailGeneric, CreateVote, ChoiceList, UserCreate, UserView
 
 urlpatterns = [
@@ -18,6 +18,6 @@ urlpatterns = [
     path("choices", ChoiceList.as_view(), name = "choices"),
     path("users" , UserCreate.as_view(), name = "user_create"),
     path("user/view" , UserView.as_view(), name = "user_view"),
-
+    path('login', LoginView.as_view(), name = "login"),
 
 ]
