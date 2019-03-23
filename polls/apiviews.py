@@ -5,7 +5,8 @@ from .models import Poll, Choice, Vote
 from django.http import JsonResponse
 from django.contrib.auth import authenticate
 from .serializers import PollSerializer
-from rest_framework import status
+from rest_framework import status, viewsets
+
 
 # Create your views here.
 ###########################################
@@ -23,7 +24,7 @@ class LoginView(APIView):
 		user = authenticate(username = username , password = password)
 		if user:
 			return Response({'token' : user.auth_token.key})
-		else:
+		else:	
 			return Response({"error" : "Wrong credentials"}, status = status.HTTP_400_BAD_REQUEST)
 
 class PollList(APIView):
@@ -54,3 +55,7 @@ class PollDetail(APIView):
 			return Response(serializer.data, status = status.HTTP_201_CREATED)
 		return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 		
+
+class PollViewSet(viewsets.ModelViewSet):
+	queryset = Poll.objects.all()
+	serializer_class = PollSerializer
