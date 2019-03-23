@@ -1,8 +1,17 @@
 from rest_framework import generics
 from .models import Poll, Choice
-from .serializers import PollSerializer, ChoiceSerializer, VoteSerializer
+from django.contrib.auth.models import User
+from .serializers import PollSerializer, ChoiceSerializer, VoteSerializer, UserSerializer
 
 # Generic classes
+
+class UserCreate(generics.CreateAPIView):
+	serializer_class = UserSerializer
+
+class UserView(generics.ListCreateAPIView):
+	queryset = User.objects.all()
+	serializer_class = UserSerializer
+
 class PollListGeneric(generics.ListCreateAPIView):
 	queryset = Poll.objects.all()
 	serializer_class = PollSerializer

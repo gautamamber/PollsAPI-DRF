@@ -12,6 +12,8 @@ from rest_framework import status
 # RestFramework views
 # APIVIEWS
 
+
+
 class PollList(APIView):
 	def get(self, request):
 		polls = Poll.objects.all()[:20]
